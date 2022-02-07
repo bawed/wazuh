@@ -2825,7 +2825,7 @@ static void test_fim_check_db_state_empty_to_full(void **state) {
 }
 
 static void test_fim_check_db_state_full_to_empty(void **state) {
-    expect_string(__wrap__mwarn, formatted_msg, "(6036): The file database status returns to normal.");
+    expect_string(__wrap__minfo, formatted_msg, "(6036): The file database status returns to normal.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":0,\"alert_type\":\"normal\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -2837,7 +2837,7 @@ static void test_fim_check_db_state_full_to_empty(void **state) {
 }
 
 static void test_fim_check_db_state_empty_to_90_percentage(void **state) {
-    expect_string(__wrap__mwarn, formatted_msg, "(6040): File database is 90% full.");
+    expect_string(__wrap__minfo, formatted_msg, "(6040): File database is 90% full.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":46000,\"alert_type\":\"90_percentage\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -2849,7 +2849,7 @@ static void test_fim_check_db_state_empty_to_90_percentage(void **state) {
 }
 
 static void test_fim_check_db_state_90_percentage_to_empty(void **state) {
-    expect_string(__wrap__mwarn, formatted_msg, "(6036): The file database status returns to normal.");
+    expect_string(__wrap__minfo, formatted_msg, "(6036): The file database status returns to normal.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":0,\"alert_type\":\"normal\"}");
     will_return(__wrap_send_log_msg, 1); 
 
@@ -2861,7 +2861,7 @@ static void test_fim_check_db_state_90_percentage_to_empty(void **state) {
 }
 
 static void test_fim_check_db_state_empty_to_80_percentage(void **state) {
-    expect_string(__wrap__mwarn, formatted_msg, "(6038): File database is 80% full.");
+    expect_string(__wrap__minfo, formatted_msg, "(6038): File database is 80% full.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":41000,\"alert_type\":\"80_percentage\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -2873,7 +2873,7 @@ static void test_fim_check_db_state_empty_to_80_percentage(void **state) {
 }
 
 static void test_fim_check_db_state_80_percentage_to_empty(void **state) {
-    expect_string(__wrap__mwarn, formatted_msg, "(6036): The file database status returns to normal.");
+    expect_string(__wrap__minfo, formatted_msg, "(6036): The file database status returns to normal.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":0,\"alert_type\":\"normal\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -2913,7 +2913,7 @@ static void test_fim_check_db_state_normal_to_full(void **state) {
 }
 
 static void test_fim_check_db_state_full_to_normal(void **state) {
-    expect_string(__wrap__mwarn, formatted_msg, "(6036): The file database status returns to normal.");
+    expect_string(__wrap__minfo, formatted_msg, "(6036): The file database status returns to normal.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":10000,\"alert_type\":\"normal\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -2926,7 +2926,7 @@ static void test_fim_check_db_state_full_to_normal(void **state) {
 
 static void test_fim_check_db_state_normal_to_90_percentage(void **state) {
 
-    expect_string(__wrap__mwarn, formatted_msg, "(6040): File database is 90% full.");
+    expect_string(__wrap__minfo, formatted_msg, "(6040): File database is 90% full.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":46000,\"alert_type\":\"90_percentage\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -2939,7 +2939,7 @@ static void test_fim_check_db_state_normal_to_90_percentage(void **state) {
 
 static void test_fim_check_db_state_90_percentage_to_normal(void **state) {
 
-    expect_string(__wrap__mwarn, formatted_msg, "(6036): The file database status returns to normal.");
+    expect_string(__wrap__minfo, formatted_msg, "(6036): The file database status returns to normal.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":10000,\"alert_type\":\"normal\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -2951,7 +2951,7 @@ static void test_fim_check_db_state_90_percentage_to_normal(void **state) {
 }
 
 static void test_fim_check_db_state_normal_to_80_percentage(void **state) {
-    expect_string(__wrap__mwarn, formatted_msg, "(6038): File database is 80% full.");
+    expect_string(__wrap__minfo, formatted_msg, "(6038): File database is 80% full.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":41000,\"alert_type\":\"80_percentage\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -2984,7 +2984,7 @@ static void test_fim_check_db_state_80_percentage_to_full(void **state) {
 
 static void test_fim_check_db_state_full_to_80_percentage(void **state) {
 
-    expect_string(__wrap__mwarn, formatted_msg, "(6038): File database is 80% full.");
+    expect_string(__wrap__minfo, formatted_msg, "(6038): File database is 80% full.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":41000,\"alert_type\":\"80_percentage\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -2996,7 +2996,7 @@ static void test_fim_check_db_state_full_to_80_percentage(void **state) {
 }
 
 static void test_fim_check_db_state_80_percentage_to_90_percentage(void **state) {
-    expect_string(__wrap__mwarn, formatted_msg, "(6040): File database is 90% full.");
+    expect_string(__wrap__minfo, formatted_msg, "(6040): File database is 90% full.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":46000,\"alert_type\":\"90_percentage\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -3036,7 +3036,7 @@ static void test_fim_check_db_state_full_to_full(void **state) {
 }
 
 static void test_fim_check_db_state_full_to_90_percentage(void **state) {
-    expect_string(__wrap__mwarn, formatted_msg, "(6040): File database is 90% full.");
+    expect_string(__wrap__minfo, formatted_msg, "(6040): File database is 90% full.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":46000,\"alert_type\":\"90_percentage\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -3048,7 +3048,7 @@ static void test_fim_check_db_state_full_to_90_percentage(void **state) {
 }
 
 static void test_fim_check_db_state_90_percentage_to_80_percentage(void **state) {
-    expect_string(__wrap__mwarn, formatted_msg, "(6038): File database is 80% full.");
+    expect_string(__wrap__minfo, formatted_msg, "(6038): File database is 80% full.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":41000,\"alert_type\":\"80_percentage\"}");
     will_return(__wrap_send_log_msg, 1);
 
@@ -3060,7 +3060,7 @@ static void test_fim_check_db_state_90_percentage_to_80_percentage(void **state)
 }
 
 static void test_fim_check_db_state_80_percentage_to_normal(void **state) {
-    expect_string(__wrap__mwarn, formatted_msg, "(6036): The file database status returns to normal.");
+    expect_string(__wrap__minfo, formatted_msg, "(6036): The file database status returns to normal.");
     expect_string(__wrap_send_log_msg, msg, "wazuh: FIM DB: {\"fim_db_table\":\"file_entry\",\"file_limit\":50000,\"file_count\":10000,\"alert_type\":\"normal\"}");
     will_return(__wrap_send_log_msg, 1);
 
