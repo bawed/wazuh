@@ -309,6 +309,8 @@ FIMDBErrorCode fim_db_transaction_deleted_rows(TXN_HANDLE txn_handler,
 
 void fim_db_teardown()
 {
+    FIMDB::instance().logFunction(LOG_ERROR, "ENTRANDO EN EL TEARDOWN");
+
     try
     {
         DB::instance().teardown();
