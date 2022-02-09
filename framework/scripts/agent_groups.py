@@ -48,7 +48,7 @@ def show_groups():
     """Show all the groups and the number of agents that belong to each one."""
     groups = send_command(function=agent.get_agent_groups, command={})
     unassigned_agents = send_command(function=agent.get_agents,
-                                     command={'q': 'id!=000;group=null'})._total_affected_items
+                                     command={'q': 'id!=000;group=null'}).total_affected_items
 
     print(f"Groups ({groups.total_affected_items}):")
     for items in groups.affected_items:
@@ -62,7 +62,7 @@ def show_group(agent_id):
 
     Parameters
     ----------
-    agent_id: list
+    agent_id : str
         The agent we want to know the groups for.
     """
 
@@ -84,7 +84,7 @@ def show_synced_agent(agent_id):
 
     Parameters
     ----------
-    agent_id: list
+    agent_id : str
         The agent we want to know if is synchronized.
     """
     result = send_command(function=agent.get_agents_sync_group, command={'agent_list': [agent_id]})
@@ -102,7 +102,7 @@ def show_agents_with_group(group_id):
 
     Parameters
     ----------
-    group_id: list
+    group_id : str
         The group we would like to see the agents for.
     """
     group_id = group_id.split(',')
@@ -121,7 +121,7 @@ def show_group_files(group_id):
 
     Parameters
     ----------
-    group_id: list
+    group_id : str
         The group we want to check the configuration files for.
     """
     group_id = group_id.split(',')
@@ -143,11 +143,11 @@ def unset_group(agent_id, group_id=None, quiet=False):
 
     Parameters
     ----------
-    agent_id: list
+    agent_id : str
         The agent we want to unset.
-    group_id: list
+    group_id : str
         The group we want to unset the agent from.
-    quiet: bool
+    quiet : bool
         No confirmation mode.
     """
     if not quiet:
@@ -176,9 +176,9 @@ def remove_group(group_id, quiet=False):
 
     Parameters
     ----------
-    group_id: list
+    group_id : str
         The group we want to remove.
-    quiet: bool
+    quiet : bool
         No confirmation mode.
     """
     if not quiet:
@@ -210,13 +210,13 @@ def set_group(agent_id, group_id, quiet=False, replace=False):
 
     Parameters
     ----------
-    agent_id: list
+    agent_id : str
         List of agents we would like to add.
-    group_id: list
+    group_id : str
         List of groups we would like to add them to.
-    quiet: bool
+    quiet : bool
         No confirmation mode.
-    replace: bool
+    replace : bool
         Force only one group.
     """
     agent_id = agent_id.split(',')
@@ -248,9 +248,9 @@ def create_group(group_id, quiet=False):
 
     Parameters
     ----------
-    group_id: str
+    group_id : str
         The name of the group we want to create.
-    quiet: bool
+    quiet : bool
         No confirmation mode.
     """
     if not quiet:
