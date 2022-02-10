@@ -64,17 +64,22 @@ void FIMDB::sync()
 void FIMDB::loopRSync()
 {
     std::unique_lock<std::mutex> lock{m_fimSyncMutex};
-    m_loggingFunction(LOG_INFO, "FIM sync module started.");
-    sync();
+    m_cv.wait(lock);
 
-    while (!m_cv.wait_for(lock, std::chrono::seconds{m_syncInterval}, [&]()
-{
-    return m_stopping;
-}))
+    if (!m_stopping)
     {
-        // LCOV_EXCL_START
+        m_loggingFunction(LOG_INFO, "FIM sync module started.");
         sync();
-        // LCOV_EXCL_STOP
+
+        while (!m_cv.wait_for(lock, std::chrono::seconds{m_syncInterval}, [&]()
+    {
+        return m_stopping;
+    }))
+        {
+            // LCOV_EXCL_START
+            sync();
+            // LCOV_EXCL_STOP
+        }
     }
     m_rsyncHandler = nullptr;
     m_dbsyncHandler = nullptr;
@@ -110,6 +115,12 @@ void FIMDB::init(unsigned int syncInterval,
         setRegistryLimit();
         setValueLimit();
     }
+    registerRSync();
+
+    m_integrityThread = std::thread([&]()
+    {
+        loopRSync();
+    });
 }
 
 void FIMDB::removeItem(const nlohmann::json& item)
@@ -134,12 +145,7 @@ void FIMDB::runIntegrity()
     if (!m_runIntegrity)
     {
         m_runIntegrity = true;
-        registerRSync();
-
-        m_integrityThread = std::thread([this]()
-        {
-            loopRSync();
-        });
+        m_cv.notify_one();
     }
     else
     {

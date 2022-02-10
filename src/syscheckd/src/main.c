@@ -118,6 +118,10 @@ int main(int argc, char **argv)
         merror_exit(SETGID_ERROR, group, errno, strerror(errno));
     }
 
+    /* Initialize error logging for shared modulesd */
+    dbsync_initialize(loggingErrorFunction);
+    rsync_initialize(loggingErrorFunction);
+
     /* Read internal options */
     read_internal(debug_level);
 

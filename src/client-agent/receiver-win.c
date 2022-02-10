@@ -51,7 +51,6 @@ void *receiver_thread(__attribute__((unused)) void *none)
     memset(file_sum, '\0', 34);
 
     while (1) {
-        mwarn("entrando en el bucle 1");
         /* Run timeout commands */
         if (agt->execdq >= 0) {
             WinTimeoutRun();
@@ -326,7 +325,6 @@ void *receiver_thread(__attribute__((unused)) void *none)
             }
         }
     }
-        mwarn("fin fin fin ");
 
     /* Clean up */
     if (fp) {
